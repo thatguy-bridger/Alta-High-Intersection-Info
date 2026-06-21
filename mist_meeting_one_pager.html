@@ -1,0 +1,190 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.page{padding:2rem 0;font-family:var(--font-sans)}
+.header{border-bottom:2px solid #1D9E75;padding-bottom:1rem;margin-bottom:1.5rem}
+.eyebrow{font-size:11px;font-weight:500;letter-spacing:.08em;text-transform:uppercase;color:#0F6E56;margin-bottom:4px}
+.title{font-size:22px;font-weight:500;color:var(--color-text-primary);line-height:1.2}
+.subtitle{font-size:13px;color:var(--color-text-secondary);margin-top:4px}
+.section-label{font-size:10px;font-weight:500;letter-spacing:.07em;text-transform:uppercase;color:var(--color-text-tertiary);margin-bottom:8px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:1.5rem}
+.stat{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem 1rem}
+.stat-num{font-size:22px;font-weight:500;color:var(--color-text-primary);line-height:1}
+.stat-label{font-size:11px;color:var(--color-text-secondary);margin-top:3px;line-height:1.3}
+.stat-good .stat-num{color:#0F6E56}
+.stat-warn .stat-num{color:#854F0B}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:1rem 1.1rem}
+.card-title{font-size:13px;font-weight:500;color:var(--color-text-primary);margin-bottom:10px;display:flex;align-items:center;gap:6px}
+.card-title i{font-size:16px;color:#1D9E75}
+.compare-row{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);gap:6px;margin-bottom:6px;align-items:center}
+.compare-row.head .cell{font-size:10px;font-weight:500;color:var(--color-text-tertiary);text-transform:uppercase;letter-spacing:.06em}
+.cell{font-size:12px;color:var(--color-text-secondary);padding:5px 8px;border-radius:6px}
+.cell-label{font-size:12px;color:var(--color-text-primary);padding:5px 0}
+.pill{font-size:11px;font-weight:500;padding:3px 8px;border-radius:99px;text-align:center}
+.g{background:#EAF3DE;color:#27500A}
+.y{background:#FAEEDA;color:#633806}
+.r{background:#FCEBEB;color:#791F1F}
+.item{display:flex;align-items:flex-start;gap:8px;margin-bottom:7px;font-size:12px;color:var(--color-text-secondary);line-height:1.4}
+.dot{width:6px;height:6px;border-radius:50%;background:#1D9E75;flex-shrink:0;margin-top:5px}
+.dot-warn{background:#BA7517}
+.quote{border-left:2.5px solid #9FE1CB;padding:8px 12px;margin-bottom:1rem;border-radius:0}
+.quote p{font-size:12px;color:var(--color-text-secondary);line-height:1.5;font-style:italic}
+.quote cite{font-size:11px;color:var(--color-text-tertiary);font-style:normal;display:block;margin-top:4px}
+.action-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:1.5rem}
+.action-card{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.75rem}
+.action-card i{font-size:18px;color:#1D9E75;display:block;margin-bottom:6px}
+.action-card p{font-size:12px;color:var(--color-text-secondary);line-height:1.4}
+.action-card strong{font-size:12px;font-weight:500;color:var(--color-text-primary);display:block;margin-bottom:2px}
+.rec-bar{background:#E1F5EE;border:1px solid #9FE1CB;border-radius:var(--border-radius-lg);padding:1rem 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.rec-bar p{font-size:13px;color:#085041;line-height:1.5}
+.rec-badge{background:#1D9E75;color:#fff;font-size:12px;font-weight:500;padding:6px 14px;border-radius:99px;white-space:nowrap;flex-shrink:0}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1.25rem 0}
+</style>
+
+<div class="page">
+<h2 class="sr-only">MIST meeting one-pager: Sandy City intersection safety analysis summary</h2>
+
+<div class="header">
+  <div class="eyebrow">Sandy City — MIST Committee</div>
+  <div class="title">110th South & 10th East intersection — safety analysis summary</div>
+  <div class="subtitle">Alta High School adjacent · All-way stop · 35 mph posted speed · Data collected on a full school day</div>
+</div>
+
+<div class="section-label">Our criteria — safety first, then operations, then cost</div>
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">38 mph</div>
+    <div class="stat-label">85th percentile speed (north leg) — above posted 35</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">High</div>
+    <div class="stat-label">Pedestrian volumes during all peak hours, including school start/end</div>
+  </div>
+  <div class="stat stat-warn">
+    <div class="stat-num">$9.3M</div>
+    <div class="stat-label">Projected 20-yr crash cost if intersection stays as-is</div>
+  </div>
+  <div class="stat stat-good">
+    <div class="stat-num">0 / 7</div>
+    <div class="stat-label">Signal warrants met — federal MUTCD criteria for installing a signal</div>
+  </div>
+</div>
+
+<div class="grid2">
+  <div class="card">
+    <div class="card-title"><i class="ti ti-arrows-diff" aria-hidden="true"></i> Side-by-side comparison</div>
+    <div class="compare-row head">
+      <div class="cell"></div>
+      <div class="cell">All-way stop</div>
+      <div class="cell">Signal</div>
+      <div class="cell">Roundabout</div>
+    </div>
+    <div class="compare-row">
+      <div class="cell-label">Pedestrian safety</div>
+      <div class="cell"><span class="pill y">Moderate</span></div>
+      <div class="cell"><span class="pill y">Moderate</span></div>
+      <div class="cell"><span class="pill g">Best</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="cell-label">Vehicle safety</div>
+      <div class="cell"><span class="pill y">Moderate</span></div>
+      <div class="cell"><span class="pill r">Lower</span></div>
+      <div class="cell"><span class="pill g">Best</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="cell-label">Conflict points</div>
+      <div class="cell"><span class="pill y">32</span></div>
+      <div class="cell"><span class="pill r">32+</span></div>
+      <div class="cell"><span class="pill g">8</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="cell-label">20-yr crash cost</div>
+      <div class="cell"><span class="pill y">$9.3M</span></div>
+      <div class="cell"><span class="pill r">$10.8M</span></div>
+      <div class="cell"><span class="pill g">$2.6M</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="cell-label">Emissions vs. baseline</div>
+      <div class="cell"><span class="pill y">Baseline</span></div>
+      <div class="cell"><span class="pill y">Some reduction</span></div>
+      <div class="cell"><span class="pill g">−37%</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="cell-label">Traffic flow (LOS)</div>
+      <div class="cell"><span class="pill y">B–C</span></div>
+      <div class="cell"><span class="pill y">B–C</span></div>
+      <div class="cell"><span class="pill g">A–B</span></div>
+    </div>
+    <div class="compare-row">
+      <div class="cell-label">City cost</div>
+      <div class="cell"><span class="pill g">Low</span></div>
+      <div class="cell"><span class="pill y">~$300K</span></div>
+      <div class="cell"><span class="pill y">~$300K match*</span></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title"><i class="ti ti-shield-check" aria-hidden="true"></i> Why signals increase costs</div>
+    <div class="item"><div class="dot dot-warn"></div><div>Signals add rear-end crashes — drivers going 35 mph face sudden red lights</div></div>
+    <div class="item"><div class="dot dot-warn"></div><div>Right-turning drivers look left for gaps, missing pedestrians already in the crosswalk</div></div>
+    <div class="item"><div class="dot dot-warn"></div><div>Left-turners watch oncoming traffic, not the crosswalk ahead of them</div></div>
+    <div class="item"><div class="dot dot-warn"></div><div>Signals still have 32+ conflict points — same as a stop sign</div></div>
+    <div class="item"><div class="dot dot-warn"></div><div>This intersection meets zero of 7 federal warrants for a signal</div></div>
+
+    <hr class="divider">
+    <div class="card-title"><i class="ti ti-circle-check" aria-hidden="true"></i> Why roundabouts work here</div>
+    <div class="item"><div class="dot"></div><div>Deflection curves physically force drivers to slow — can't blow through like a stop sign</div></div>
+    <div class="item"><div class="dot"></div><div>Only 8 conflict points vs. 32 → 75% fewer chances for serious crashes</div></div>
+    <div class="item"><div class="dot"></div><div>88–90% reduction in serious injury and fatal crashes (national data)</div></div>
+    <div class="item"><div class="dot"></div><div>Continuous flow = less idling, 37% emissions reduction next to a school</div></div>
+    <div class="item"><div class="dot"></div><div>Grant already secured — city match (~$300K) equals the cost of a signal</div></div>
+  </div>
+</div>
+
+<div class="section-label">Additional safety features recommended for school-adjacent roundabout</div>
+<div class="action-grid">
+  <div class="action-card">
+    <i class="ti ti-fence" aria-hidden="true"></i>
+    <strong>Pedestrian fencing</strong>
+    <p>Channels students to marked crosswalks rather than crossing freely when school lets out</p>
+  </div>
+  <div class="action-card">
+    <i class="ti ti-traffic-lights" aria-hidden="true"></i>
+    <strong>RRFBs at crossings</strong>
+    <p>Rectangular rapid flashing beacons activate when pedestrians press to cross, visible to drivers</p>
+  </div>
+  <div class="action-card">
+    <i class="ti ti-arrows-shuffle" aria-hidden="true"></i>
+    <strong>Z-crossings</strong>
+    <p>Median islands force pedestrians to physically turn and face traffic before completing the crossing</p>
+  </div>
+  <div class="action-card">
+    <i class="ti ti-road" aria-hidden="true"></i>
+    <strong>Deflection curves</strong>
+    <p>Approach geometry slows every vehicle entering the roundabout — no option to proceed at speed</p>
+  </div>
+  <div class="action-card">
+    <i class="ti ti-sign-left" aria-hidden="true"></i>
+    <strong>Advance warning signs</strong>
+    <p>Roundabout-ahead signage on 110th South (downhill) where the intersection isn't visible until late</p>
+  </div>
+  <div class="action-card">
+    <i class="ti ti-user-shield" aria-hidden="true"></i>
+    <strong>Crossing guards retained</strong>
+    <p>This intersection already qualifies; crossing guards would remain in place post-construction</p>
+  </div>
+</div>
+
+<div class="quote">
+  <p>"When I started this petition, the primary goal was safety reform — prioritizing pedestrian safety first. High school students, elementary students, people walking around. Looking at the comparison, there's only one option highlighted green for pedestrian safety. That makes the decision pretty easy."</p>
+  <cite>— Marci, petition organizer and committee member</cite>
+</div>
+
+<div class="rec-bar">
+  <p><strong style="color:#085041">Committee recommendation: roundabout.</strong> The data supports it on every safety, operational, and cost measure. A grant is already in place. The city's out-of-pocket cost is the same as installing a signal.</p>
+  <div class="rec-badge"><i class="ti ti-check" style="font-size:13px;vertical-align:-1px;margin-right:4px" aria-hidden="true"></i>Consensus reached</div>
+</div>
+
+<div style="margin-top:.75rem;font-size:11px;color:var(--color-text-tertiary)">*Grant covers majority of roundabout construction; city match ~$300K — equivalent to full signal cost. · Data: WFRC emissions model, FHWA Highway Safety Manual, national CMF Clearinghouse.</div>
+</div>
