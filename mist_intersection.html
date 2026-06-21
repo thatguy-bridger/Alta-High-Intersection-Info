@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>110th South & 10th East — Sandy City Intersection Safety</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #0E1B2E;
+    --navy-mid: #1A2D45;
+    --teal: #1A9E76;
+    --teal-light: #E4F5EE;
+    --teal-mid: #0D7A5A;
+    --amber: #E8941A;
+    --amber-light: #FEF4E6;
+    --red: #D94040;
+    --red-light: #FDEAEA;
+    --white: #FFFFFF;
+    --off: #F5F6F8;
+    --gray: #6B7280;
+    --gray-light: #E5E7EB;
+    --text: #0E1B2E;
+    --serif: 'DM Serif Display', Georgia, serif;
+    --sans: 'Inter', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--sans);
+    color: var(--text);
+    background: var(--white);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(14,27,46,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+  }
+  .nav-brand {
+    font-family: var(--sans); font-size: 13px; font-weight: 600;
+    color: var(--white); letter-spacing: .02em;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    font-size: 13px; color: rgba(255,255,255,0.6);
+    text-decoration: none; transition: color .2s;
+  }
+  .nav-links a:hover { color: #fff; }
+
+  /* HERO */
+  .hero {
+    background: var(--navy);
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 100px 2rem 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(26,158,118,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner { max-width: 1100px; margin: 0 auto; width: 100%; position: relative; }
+  .hero-eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 28px; height: 1px; background: var(--teal);
+  }
+  .hero h1 {
+    font-family: var(--serif); font-size: clamp(2.8rem, 6vw, 5.5rem);
+    font-weight: 400; color: var(--white); line-height: 1.1;
+    max-width: 800px; margin-bottom: 1.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--teal); }
+  .hero-sub {
+    font-size: 1.1rem; color: rgba(255,255,255,0.6);
+    max-width: 560px; margin-bottom: 3rem; line-height: 1.7;
+  }
+  .hero-stats {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px; max-width: 680px;
+    border: 1.5px solid rgba(255,255,255,0.1); border-radius: 12px; overflow: hidden;
+  }
+  .hero-stat {
+    padding: 1.5rem 1.75rem;
+    background: rgba(255,255,255,0.04);
+    border-right: 1.5px solid rgba(255,255,255,0.08);
+  }
+  .hero-stat:last-child { border-right: none; }
+  .hero-stat-num {
+    font-family: var(--serif); font-size: 2.8rem;
+    color: var(--white); line-height: 1; margin-bottom: 6px;
+  }
+  .hero-stat-num span { color: var(--teal); }
+  .hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.4; }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+    color: rgba(255,255,255,0.3); font-size: 11px; letter-spacing: .08em; text-transform: uppercase;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .hero-scroll svg { width: 20px; height: 20px; }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(6px); } }
+
+  /* SECTIONS */
+  section { padding: 100px 2rem; }
+  .inner { max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--teal); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400; line-height: 1.15; margin-bottom: 1.25rem;
+    color: var(--text);
+  }
+  .section-lead {
+    font-size: 1.05rem; color: var(--gray); max-width: 560px; line-height: 1.7;
+  }
+  .alt-bg { background: var(--off); }
+
+  /* SAFE SYSTEM SECTION */
+  .safe-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    align-items: center; margin-top: 4rem;
+  }
+  .safe-text h3 {
+    font-family: var(--serif); font-size: 1.75rem; margin-bottom: 1rem;
+    color: var(--text); font-weight: 400;
+  }
+  .safe-text p { font-size: 15px; color: var(--gray); line-height: 1.75; margin-bottom: 1.25rem; }
+  .safe-callout {
+    background: var(--navy); color: var(--white); border-radius: 12px;
+    padding: 1.5rem 1.75rem; font-size: 15px; line-height: 1.6;
+    position: relative; margin-top: 1.5rem;
+  }
+  .safe-callout strong { color: var(--teal); }
+  .safe-visual {
+    background: var(--navy); border-radius: 16px;
+    padding: 2rem; display: flex; flex-direction: column; align-items: center; gap: 2rem;
+  }
+  .conflict-diagram { width: 100%; }
+  .conflict-label {
+    font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 1rem; text-align: center;
+  }
+  .conflict-dots {
+    display: grid; gap: 8px; justify-content: center; margin-bottom: 1rem;
+  }
+  .conflict-dots.c32 { grid-template-columns: repeat(8, 18px); }
+  .conflict-dots.c8  { grid-template-columns: repeat(8, 18px); }
+  .cdot {
+    width: 18px; height: 18px; border-radius: 50%;
+    transition: all .4s ease;
+  }
+  .cdot.danger { background: var(--red); }
+  .cdot.safe   { background: var(--teal); }
+  .cdot.empty  { background: rgba(255,255,255,0.06); }
+  .conflict-count {
+    font-family: var(--serif); font-size: 3rem; font-weight: 400;
+    text-align: center; line-height: 1;
+  }
+  .conflict-count.bad  { color: var(--red); }
+  .conflict-count.good { color: var(--teal); }
+  .conflict-sublabel { font-size: 12px; color: rgba(255,255,255,0.4); text-align: center; }
+  .conflict-divider {
+    width: 1px; height: 100px; background: rgba(255,255,255,0.1);
+    margin: 0 auto;
+  }
+
+  /* COMPARISON TABLE */
+  .compare-section { background: var(--off); }
+  .compare-table-wrap { margin-top: 3.5rem; overflow-x: auto; }
+  .compare-table {
+    width: 100%; border-collapse: collapse; font-size: 14px;
+    border-radius: 14px; overflow: hidden;
+  }
+  .compare-table thead tr {
+    background: var(--navy);
+  }
+  .compare-table thead th {
+    padding: 1.1rem 1.25rem; text-align: left;
+    font-size: 12px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .compare-table thead th.col-highlight {
+    background: var(--teal-mid); color: rgba(255,255,255,0.9);
+  }
+  .compare-table thead th.col-main { color: var(--white); }
+  .compare-table tbody tr { border-bottom: 1px solid var(--gray-light); }
+  .compare-table tbody tr:last-child { border-bottom: none; }
+  .compare-table tbody tr:hover td { background: rgba(26,158,118,0.03); }
+  .compare-table tbody td {
+    padding: 1rem 1.25rem; background: var(--white);
+    vertical-align: middle;
+  }
+  .compare-table tbody td.col-highlight {
+    background: #F0FAF6;
+  }
+  .row-label { font-weight: 500; color: var(--text); font-size: 14px; }
+  .row-sub { font-size: 12px; color: var(--gray); margin-top: 2px; }
+  .badge {
+    display: inline-block; font-size: 12px; font-weight: 600;
+    padding: 3px 10px; border-radius: 99px;
+  }
+  .badge-good { background: #E4F5EE; color: #0D7A5A; }
+  .badge-warn { background: #FEF4E6; color: #A36010; }
+  .badge-bad  { background: #FDEAEA; color: #A32020; }
+  .badge-rec  {
+    background: var(--teal); color: white;
+    font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  /* INFOGRAPHIC: CRASH COST */
+  .cost-section { background: var(--navy); color: var(--white); }
+  .cost-section .section-title { color: var(--white); }
+  .cost-section .section-lead { color: rgba(255,255,255,0.55); }
+  .cost-bars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 3.5rem; }
+  .cost-bar-wrap { display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+  .cost-bar-label-top {
+    font-size: 12px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); text-align: center;
+  }
+  .cost-bar-chart { width: 100%; height: 220px; display: flex; align-items: flex-end; justify-content: center; }
+  .cost-bar-fill {
+    width: 72px; border-radius: 8px 8px 0 0;
+    transition: height 1s ease; position: relative;
+    display: flex; align-items: flex-start; justify-content: center; padding-top: 10px;
+  }
+  .cost-bar-fill.bar-warn  { background: rgba(232,148,26,0.7); }
+  .cost-bar-fill.bar-bad   { background: rgba(217,64,64,0.7); }
+  .cost-bar-fill.bar-good  { background: var(--teal); }
+  .cost-bar-amount {
+    font-family: var(--serif); font-size: 1.5rem; color: var(--white); font-weight: 400;
+  }
+  .cost-bar-bottom {
+    font-family: var(--serif); font-size: 2rem; color: var(--white); text-align: center;
+  }
+  .cost-bar-sub { font-size: 12px; color: rgba(255,255,255,0.45); text-align: center; line-height: 1.4; }
+  .cost-note {
+    margin-top: 3rem; background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 10px;
+    padding: 1.25rem 1.5rem; font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6;
+    max-width: 680px;
+  }
+
+  /* WARRANT SECTION */
+  .warrant-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 3rem;
+  }
+  .warrant-card {
+    background: var(--white); border: 1px solid var(--gray-light);
+    border-radius: 12px; padding: 1.25rem;
+  }
+  .warrant-icon {
+    width: 36px; height: 36px; border-radius: 8px; background: var(--red-light);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
+  }
+  .warrant-icon svg { width: 18px; height: 18px; stroke: var(--red); fill: none; stroke-width: 2; }
+  .warrant-name { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .warrant-result { font-size: 12px; color: var(--gray); line-height: 1.4; }
+  .warrant-badge {
+    display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 600;
+    padding: 2px 8px; border-radius: 4px; background: var(--red-light); color: var(--red);
+  }
+  .warrant-intro { max-width: 640px; margin-bottom: 2.5rem; }
+  .warrant-intro p { font-size: 15px; color: var(--gray); line-height: 1.75; }
+  .warrant-summary {
+    margin-top: 2.5rem; background: var(--red-light);
+    border-radius: 12px; padding: 1.5rem 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .warrant-summary-num {
+    font-family: var(--serif); font-size: 4rem; color: var(--red); line-height: 1; white-space: nowrap;
+  }
+  .warrant-summary-text { font-size: 15px; color: #7A1A1A; line-height: 1.6; }
+
+  /* FEATURES SECTION */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-top: 3rem;
+  }
+  .feature-card {
+    background: var(--white); border: 1px solid var(--gray-light);
+    border-radius: 14px; padding: 1.5rem;
+    transition: border-color .2s, box-shadow .2s;
+  }
+  .feature-card:hover {
+    border-color: var(--teal); box-shadow: 0 4px 24px rgba(26,158,118,0.1);
+  }
+  .feature-icon {
+    width: 44px; height: 44px; border-radius: 10px; background: var(--teal-light);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;
+  }
+  .feature-icon svg { width: 22px; height: 22px; stroke: var(--teal); fill: none; stroke-width: 2; }
+  .feature-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .feature-desc { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  /* QUOTE */
+  .quote-section { background: var(--teal); }
+  .quote-inner { max-width: 780px; margin: 0 auto; text-align: center; }
+  blockquote {
+    font-family: var(--serif); font-size: clamp(1.5rem, 3vw, 2.4rem);
+    font-weight: 400; font-style: italic; color: var(--white);
+    line-height: 1.4; margin-bottom: 1.5rem;
+  }
+  cite {
+    font-family: var(--sans); font-size: 13px; font-style: normal;
+    color: rgba(255,255,255,0.65); letter-spacing: .04em;
+  }
+
+  /* RECOMMENDATION */
+  .rec-section { background: var(--navy); color: var(--white); }
+  .rec-section .section-title { color: var(--white); }
+  .rec-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; margin-top: 3.5rem; align-items: start; }
+  .rec-list { list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .rec-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+    font-size: 14px; color: rgba(255,255,255,0.7); line-height: 1.6;
+  }
+  .rec-check {
+    width: 22px; height: 22px; border-radius: 50%; background: var(--teal);
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;
+  }
+  .rec-check svg { width: 12px; height: 12px; stroke: white; fill: none; stroke-width: 2.5; }
+  .rec-action-panel {
+    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px; padding: 2rem;
+  }
+  .rec-action-title {
+    font-family: var(--serif); font-size: 1.4rem; color: var(--white); margin-bottom: 1.5rem;
+  }
+  .action-item {
+    display: flex; gap: 12px; align-items: flex-start; margin-bottom: 1.1rem;
+    padding-bottom: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.07);
+  }
+  .action-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+  .action-dot {
+    width: 8px; height: 8px; border-radius: 50%; margin-top: 7px; flex-shrink: 0;
+  }
+  .dot-teal { background: var(--teal); }
+  .dot-amber { background: var(--amber); }
+  .action-text { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  .action-text strong { color: rgba(255,255,255,0.9); font-weight: 500; display: block; margin-bottom: 2px; }
+
+  /* FOOTER */
+  footer {
+    background: #080F18; padding: 3rem 2rem;
+    border-top: 1px solid rgba(255,255,255,0.06);
+  }
+  .footer-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 2rem; flex-wrap: wrap;
+  }
+  .footer-brand { font-size: 13px; color: rgba(255,255,255,0.35); }
+  .footer-brand strong { color: rgba(255,255,255,0.6); display: block; margin-bottom: 4px; }
+  .footer-note { font-size: 11px; color: rgba(255,255,255,0.25); max-width: 400px; line-height: 1.6; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .safe-grid { grid-template-columns: 1fr; }
+    .cost-bars { grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    .warrant-grid { grid-template-columns: 1fr 1fr; }
+    .features-grid { grid-template-columns: 1fr 1fr; }
+    .rec-layout { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr; max-width: 320px; }
+    .hero-stat { border-right: none; border-bottom: 1.5px solid rgba(255,255,255,0.08); }
+    .hero-stat:last-child { border-bottom: none; }
+  }
+  @media (max-width: 600px) {
+    section { padding: 70px 1.25rem; }
+    nav { padding: 0 1.25rem; }
+    .nav-links { display: none; }
+    .warrant-grid { grid-template-columns: 1fr; }
+    .features-grid { grid-template-columns: 1fr; }
+    .cost-bars { grid-template-columns: 1fr; }
+    .cost-bar-chart { height: 140px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-brand">
+    <div class="nav-dot"></div>
+    Sandy City · MIST Committee
+  </div>
+  <ul class="nav-links">
+    <li><a href="#safety">Safety</a></li>
+    <li><a href="#comparison">Comparison</a></li>
+    <li><a href="#costs">Crash Costs</a></li>
+    <li><a href="#warrants">Signal Warrants</a></li>
+    <li><a href="#features">Safety Features</a></li>
+    <li><a href="#recommendation">Recommendation</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">110th South & 10th East · Sandy, Utah</div>
+    <h1>A safer intersection is possible.<br><em>The data shows one clear path.</em></h1>
+    <p class="hero-sub">An independent traffic engineering analysis of the intersection adjacent to Alta High School — reviewed by the MIST committee and presented to Sandy City Council.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">75<span>%</span></div>
+        <div class="hero-stat-label">Fewer conflict points with a roundabout vs. current 4-way stop</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">0<span>/7</span></div>
+        <div class="hero-stat-label">Federal signal warrants met — a traffic light is not indicated here</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">$6.7<span>M</span></div>
+        <div class="hero-stat-label">Projected 20-year savings vs. keeping the current all-way stop</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    Scroll to explore
+  </div>
+</div>
+
+<!-- SAFE SYSTEM -->
+<section id="safety">
+  <div class="inner">
+    <div class="safe-grid">
+      <div class="safe-text">
+        <div class="section-eyebrow">The safe system approach</div>
+        <h2 class="section-title">People make mistakes.<br>The road shouldn't punish them for it.</h2>
+        <p>Traditional traffic engineering puts the burden of safety entirely on human behavior — obey the speed limit, stop completely, yield when required. The Safe System approach, now adopted by UDOT and the federal government, starts from a different premise: people will always make errors, and we should design roads that don't turn those errors fatal.</p>
+        <p>The two most powerful levers are <strong>reducing vehicle speed</strong> (less kinetic energy in a crash) and <strong>eliminating conflict points</strong> (fewer chances for crashes to happen at all). Both are achieved by a roundabout.</p>
+        <div class="safe-callout">
+          At 40 mph, a pedestrian struck by a vehicle has approximately a <strong>85% chance of dying</strong>. At 20 mph, that drops to under 10%. Slowing cars before the intersection isn't a minor improvement — it's the difference between a close call and a fatality.
+        </div>
+      </div>
+
+      <div class="safe-visual">
+        <div class="conflict-diagram">
+          <div class="conflict-label">All-way stop (current)</div>
+          <div class="conflict-dots c32" id="dots32"></div>
+          <div class="conflict-count bad" id="count32">32</div>
+          <div class="conflict-sublabel">vehicle conflict points</div>
+        </div>
+        <div class="conflict-divider"></div>
+        <div class="conflict-diagram">
+          <div class="conflict-label">Roundabout</div>
+          <div class="conflict-dots c8" id="dots8"></div>
+          <div class="conflict-count good" id="count8">8</div>
+          <div class="conflict-sublabel">vehicle conflict points</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="comparison" class="compare-section">
+  <div class="inner">
+    <div class="section-eyebrow">Side-by-side analysis</div>
+    <h2 class="section-title">Three options. One winner.</h2>
+    <p class="section-lead">Every option was evaluated on the same criteria. The roundabout leads or ties on every metric that matters for this location.</p>
+    <div class="compare-table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th style="width:34%">Criteria</th>
+            <th>All-way stop <span style="font-size:10px;color:rgba(255,255,255,0.35);font-weight:400">(current)</span></th>
+            <th>Traffic signal</th>
+            <th class="col-highlight col-main">Roundabout <span class="badge-rec">Recommended</span></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="row-label">Pedestrian safety</div><div class="row-sub">Based on conflict point geometry and crossing exposure</div></td>
+            <td><span class="badge badge-warn">Moderate</span></td>
+            <td><span class="badge badge-warn">Moderate</span></td>
+            <td class="col-highlight"><span class="badge badge-good">Best</span></td>
+          </tr>
+          <tr>
+            <td><div class="row-label">Vehicle safety</div><div class="row-sub">Injury & fatal crash rate vs. national CMF data</div></td>
+            <td><span class="badge badge-warn">Moderate</span></td>
+            <td><span class="badge badge-bad">Lower</span></td>
+            <td class="col-highlight"><span class="badge badge-good">Best</span></td>
+          </tr>
+          <tr>
+            <td><div class="row-label">Vehicle conflict points</div><div class="row-sub">Fewer = fewer chances for a serious crash</div></td>
+            <td><span class="badge badge-warn">32</span></td>
+            <td><span class="badge badge-bad">32+</span></td>
+            <td class="col-highlight"><span class="badge badge-good">8</span></td>
+          </tr>
+          <tr>
+            <td><div class="row-label">20-year crash cost</div><div class="row-sub">Societal cost including emergency response, injury, and fatality</div></td>
+            <td><span class="badge badge-warn">$9.3M</span></td>
+            <td><span class="badge badge-bad">$10.8M</span></td>
+            <td class="col-highlight"><span class="badge badge-good">$2.6M</span></td>
+          </tr>
+          <tr>
+            <td><div class="row-label">Emissions reduction</div><div class="row-sub">Vs. current all-way stop baseline</div></td>
+            <td><span class="badge badge-warn">Baseline</span></td>
+            <td><span class="badge badge-warn">Some</span></td>
+            <td class="col-highlight"><span class="badge badge-good">−37%</span></td>
+          </tr>
+          <tr>
+            <td><div class="row-label">Traffic operations (LOS)</div><div class="row-sub">Level of service during school peak hour</div></td>
+            <td><span class="badge badge-warn">B–C</span></td>
+            <td><span class="badge badge-warn">B–C</span></td>
+            <td class="col-highlight"><span class="badge badge-good">A–B</span></td>
+          </tr>
+          <tr>
+            <td><div class="row-label">Signal warrant status</div><div class="row-sub">Federal MUTCD — 7 warrants evaluated</div></td>
+            <td>N/A</td>
+            <td><span class="badge badge-bad">0 of 7 met</span></td>
+            <td class="col-highlight">N/A</td>
+          </tr>
+          <tr>
+            <td><div class="row-label">City cost</div><div class="row-sub">Net city contribution after grants</div></td>
+            <td><span class="badge badge-warn">Low (no change)</span></td>
+            <td><span class="badge badge-warn">~$300K</span></td>
+            <td class="col-highlight"><span class="badge badge-good">~$300K match*</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px;color:var(--gray);margin-top:1rem">* Grant already secured covers the majority of roundabout construction. City match is approximately equal to the full cost of a signal.</p>
+  </div>
+</section>
+
+<!-- CRASH COST BARS -->
+<section id="costs" class="cost-section">
+  <div class="inner">
+    <div class="section-eyebrow" style="color:var(--teal)">Projected 20-year crash costs</div>
+    <h2 class="section-title">A signal isn't the safe choice.<br>The numbers say so.</h2>
+    <p class="section-lead" style="color:rgba(255,255,255,0.55)">Many people assume a traffic signal is the safest option. At this intersection, the data shows the opposite — signals add rear-end crashes and maintain the same conflict geometry as a stop sign.</p>
+
+    <div class="cost-bars">
+      <div class="cost-bar-wrap">
+        <div class="cost-bar-label-top">All-way stop<br><span style="color:rgba(255,255,255,0.25)">(current)</span></div>
+        <div class="cost-bar-chart">
+          <div class="cost-bar-fill bar-warn" style="height:75%">
+            <div class="cost-bar-amount">$9.3M</div>
+          </div>
+        </div>
+        <div class="cost-bar-sub">Baseline cost over<br>20 years</div>
+      </div>
+      <div class="cost-bar-wrap">
+        <div class="cost-bar-label-top">Traffic signal</div>
+        <div class="cost-bar-chart">
+          <div class="cost-bar-fill bar-bad" style="height:87%">
+            <div class="cost-bar-amount">$10.8M</div>
+          </div>
+        </div>
+        <div class="cost-bar-sub">Higher than existing<br>— signals add rear-ends</div>
+      </div>
+      <div class="cost-bar-wrap">
+        <div class="cost-bar-label-top">Roundabout</div>
+        <div class="cost-bar-chart">
+          <div class="cost-bar-fill bar-good" style="height:22%">
+            <div class="cost-bar-amount">$2.6M</div>
+          </div>
+        </div>
+        <div class="cost-bar-sub">72% lower cost —<br>fewer, less-severe crashes</div>
+      </div>
+    </div>
+
+    <div class="cost-note">
+      <strong style="color:rgba(255,255,255,0.7);display:block;margin-bottom:6px">What "crash cost" means</strong>
+      This is a societal metric — not just repair bills. It includes emergency response, traffic investigation time, medical care, rehabilitation, lost wages, and the statistical value of life. The methodology comes from the FHWA Highway Safety Manual and is used by transportation agencies across the country.
+    </div>
+  </div>
+</section>
+
+<!-- SIGNAL WARRANTS -->
+<section id="warrants">
+  <div class="inner">
+    <div class="section-eyebrow">Federal signal warrant analysis</div>
+    <h2 class="section-title">Zero of seven warrants met.</h2>
+    <div class="warrant-intro">
+      <p>The Manual on Uniform Traffic Control Devices (MUTCD) defines seven specific conditions under which a traffic signal may be appropriate. An intersection must meet at least one. This intersection meets none. Installing a signal here would conflict with federal engineering guidance.</p>
+    </div>
+
+    <div class="warrant-grid">
+      <div class="warrant-card">
+        <div class="warrant-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6l9 6-9 6"/></svg>
+        </div>
+        <div class="warrant-name">Warrant 1 — Vehicle volume</div>
+        <div class="warrant-result">Traffic volumes don't reach the 8-hour threshold for any approach</div>
+        <div class="warrant-badge">Not met</div>
+      </div>
+      <div class="warrant-card">
+        <div class="warrant-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 12h18M3 6l9 6-9 6"/></svg>
+        </div>
+        <div class="warrant-name">Warrant 2 — Interruption of continuous flow</div>
+        <div class="warrant-result">Side-street volumes aren't sufficient to warrant interrupting main-street flow</div>
+        <div class="warrant-badge">Not met</div>
+      </div>
+      <div class="warrant-card">
+        <div class="warrant-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        </div>
+        <div class="warrant-name">Warrant 3 — Minimum pedestrian volume</div>
+        <div class="warrant-result">Pedestrian counts during non-school hours are below the minimum threshold</div>
+        <div class="warrant-badge">Not met</div>
+      </div>
+      <div class="warrant-card">
+        <div class="warrant-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2v6M12 16v6M4.93 4.93l4.24 4.24M14.83 14.83l4.24 4.24"/></svg>
+        </div>
+        <div class="warrant-name">Warrant 4 — School crossing</div>
+        <div class="warrant-result">Adequate gaps exist in traffic for supervised school crossings; signal not needed</div>
+        <div class="warrant-badge">Not met</div>
+      </div>
+      <div class="warrant-card">
+        <div class="warrant-icon">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="warrant-name">Warrant 5 — Coordinated signal system</div>
+        <div class="warrant-result">No nearby signal network that would benefit from adding this intersection</div>
+        <div class="warrant-badge">Not met</div>
+      </div>
+      <div class="warrant-card">
+        <div class="warrant-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        </div>
+        <div class="warrant-name">Warrant 6 — Crash experience</div>
+        <div class="warrant-result">Crash history doesn't meet the volume/severity threshold for signal justification</div>
+        <div class="warrant-badge">Not met</div>
+      </div>
+      <div class="warrant-card">
+        <div class="warrant-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
+        </div>
+        <div class="warrant-name">Warrant 7 — Roadway network</div>
+        <div class="warrant-result">This location isn't part of a network gap or progression system requiring a signal</div>
+        <div class="warrant-badge">Not met</div>
+      </div>
+      <div class="warrant-card" style="background:var(--off);border-color:var(--gray-light);display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:140px">
+        <div style="font-family:var(--serif);font-size:3.5rem;color:var(--red);line-height:1">0</div>
+        <div style="font-size:13px;font-weight:600;color:var(--text);margin-top:6px">of 7 warrants met</div>
+        <div style="font-size:12px;color:var(--gray);margin-top:4px">A signal is not supported by federal criteria</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section id="features" class="alt-bg">
+  <div class="inner">
+    <div class="section-eyebrow">Proposed safety enhancements</div>
+    <h2 class="section-title">Built for students, parents,<br>and everyday drivers.</h2>
+    <p class="section-lead">A roundabout alone isn't the full plan. These school-specific safety features are built into the recommendation.</p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="feature-title">Pedestrian fencing</div>
+        <div class="feature-desc">Guides students to marked crosswalks when school lets out, preventing free-crossing through the roundabout at peak times.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="feature-title">Rectangular rapid flashing beacons (RRFBs)</div>
+        <div class="feature-desc">Driver-activated LED beacons at each crosswalk. When a pedestrian presses to cross, high-intensity lights flash to alert approaching vehicles.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="feature-title">Z-crossing configuration</div>
+        <div class="feature-desc">Median islands physically turn pedestrians mid-crossing so they face oncoming traffic before completing the second half — a proven visibility improvement.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M10 16l-6-6 6-6M20 21v-7a4 4 0 00-4-4H5"/></svg>
+        </div>
+        <div class="feature-title">Deflection curves</div>
+        <div class="feature-desc">Approach geometry forces drivers to curve slightly before entering the roundabout, physically reducing speed without requiring driver compliance.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="feature-title">Advance warning signage</div>
+        <div class="feature-desc">Large roundabout-ahead signs on 110th South (the downhill approach) where drivers won't see the intersection until they're close.</div>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="feature-title">Crossing guards retained</div>
+        <div class="feature-desc">This intersection already qualifies for a crossing guard under state criteria. That remains unchanged — and the roundabout's lower speeds make their job safer.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section" style="padding:80px 2rem;">
+  <div class="quote-inner">
+    <blockquote>"When I started this petition, the primary goal was safety reform — prioritizing pedestrian safety first. Looking at the data, there's only one option highlighted as best for pedestrian safety. That makes the decision pretty easy."</blockquote>
+    <cite>— Marci, petition organizer and MIST committee member</cite>
+  </div>
+</section>
+
+<!-- RECOMMENDATION -->
+<section id="recommendation" class="rec-section">
+  <div class="inner">
+    <div class="section-eyebrow" style="color:var(--teal)">Committee recommendation</div>
+    <h2 class="section-title">Build the roundabout.</h2>
+    <div class="rec-layout">
+      <div>
+        <p style="color:rgba(255,255,255,0.6);font-size:15px;line-height:1.75;margin-bottom:2rem">The MIST committee reached consensus after reviewing all available data. The roundabout is the only option that improves safety by every measurable standard, meets grant requirements already in place, and does so at no additional cost to the city compared to a signal.</p>
+        <ul class="rec-list">
+          <li class="rec-item">
+            <div class="rec-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>75% reduction in vehicle conflict points — from 32 to 8</span>
+          </li>
+          <li class="rec-item">
+            <div class="rec-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>88–90% reduction in serious injury and fatal crashes (national data)</span>
+          </li>
+          <li class="rec-item">
+            <div class="rec-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>$6.7M projected savings over 20 years vs. current intersection</span>
+          </li>
+          <li class="rec-item">
+            <div class="rec-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>37% reduction in emissions next to a school campus</span>
+          </li>
+          <li class="rec-item">
+            <div class="rec-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Grant already secured — city match equivalent to signal cost</span>
+          </li>
+          <li class="rec-item">
+            <div class="rec-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Zero federal signal warrants met — signal not indicated at this location</span>
+          </li>
+          <li class="rec-item">
+            <div class="rec-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Six dedicated school-adjacent safety features included in design</span>
+          </li>
+        </ul>
+      </div>
+      <div class="rec-action-panel">
+        <div class="rec-action-title">Next steps</div>
+        <div class="action-item">
+          <div class="action-dot dot-teal"></div>
+          <div class="action-text">
+            <strong>Sandy City Council review</strong>
+            Committee recommendation forwarded to council for direction on public engagement process
+          </div>
+        </div>
+        <div class="action-item">
+          <div class="action-dot dot-teal"></div>
+          <div class="action-text">
+            <strong>Public education plan</strong>
+            Council to determine format — town hall, open house, or online materials — before data is released publicly
+          </div>
+        </div>
+        <div class="action-item">
+          <div class="action-dot dot-amber"></div>
+          <div class="action-text">
+            <strong>Community outreach</strong>
+            UDOT roundabout education video and one-page summary available for distribution to petition signers and affected residents
+          </div>
+        </div>
+        <div class="action-item">
+          <div class="action-dot dot-amber"></div>
+          <div class="action-text">
+            <strong>Design phase</strong>
+            Upon council approval, detailed engineering and community input on specific design features (fencing layout, crosswalk locations, etc.)
+          </div>
+        </div>
+        <div style="margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid rgba(255,255,255,0.08)">
+          <div style="font-size:11px;color:rgba(255,255,255,0.3);line-height:1.6">Data sources: WFRC emissions model · FHWA Highway Safety Manual · MUTCD 2009 (signal warrants) · National CMF Clearinghouse · UDOT Safe System Action Plan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong>Sandy City · MIST Committee</strong>
+      110th South & 10th East Intersection Safety Study
+    </div>
+    <div class="footer-note">
+      This site summarizes the findings of an independent traffic engineering analysis conducted for the MIST committee. Data not for public release pending Sandy City Council direction on public engagement.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Build conflict-point dot diagrams
+  function buildDots(containerId, total, danger) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const cols = 8;
+    const rows = Math.ceil(total / cols);
+    // Pad to full grid
+    const gridSize = cols * rows;
+    for (let i = 0; i < gridSize; i++) {
+      const d = document.createElement('div');
+      d.className = 'cdot';
+      if (i < danger) d.classList.add('danger');
+      else if (i < total) d.classList.add('safe');
+      else d.classList.add('empty');
+      el.appendChild(d);
+    }
+  }
+
+  // 32 conflict points — all danger for current stop
+  buildDots('dots32', 32, 32);
+  // 8 conflict points — all safe (teal) for roundabout, 24 empty
+  buildDots('dots8', 32, 0);
+  // Overwrite: first 8 as 'safe', rest 'empty'
+  const c8 = document.getElementById('dots8');
+  c8.innerHTML = '';
+  for (let i = 0; i < 32; i++) {
+    const d = document.createElement('div');
+    d.className = 'cdot ' + (i < 8 ? 'safe' : 'empty');
+    c8.appendChild(d);
+  }
+
+  // Animate dots on scroll into view
+  const safeSection = document.getElementById('safety');
+  let animated = false;
+  const obs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !animated) {
+      animated = true;
+      const danger = document.querySelectorAll('#dots32 .cdot.danger');
+      danger.forEach((d, i) => {
+        setTimeout(() => { d.style.transform = 'scale(1.15)'; d.style.boxShadow = '0 0 8px rgba(217,64,64,0.6)'; }, i * 20);
+        setTimeout(() => { d.style.transform = ''; d.style.boxShadow = ''; }, i * 20 + 400);
+      });
+    }
+  }, { threshold: 0.5 });
+  if (safeSection) obs.observe(safeSection);
+
+  // Smooth scroll for nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+</script>
+</body>
+</html>
